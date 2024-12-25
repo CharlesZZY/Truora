@@ -1,3 +1,6 @@
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
 import soundfile as sf
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
@@ -20,8 +23,6 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 import joblib
-import os
-os.environ["KERAS_BACKEND"] = "torch"
 
 
 class Config:
