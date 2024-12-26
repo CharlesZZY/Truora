@@ -1,15 +1,31 @@
 import os
-from typing import Tuple
-from .base import BaseModel
 from keras import layers, models, callbacks
+from typing import Any, Tuple
 from utils import show_history
+from .base import BaseModel
 
 
 class NNModel(BaseModel):
-    def __init__(self):
+    """
+    Neural Network model using CNN-LSTM architecture with Attention mechanism.
+    """
+
+    def __init__(self) -> None:
+        """
+        Initializes the NNModel.
+        """
         super().__init__()
 
-    def build_model(self, input_shape: Tuple[int, int, int]):
+    def build(self, input_shape: Tuple[int, int, int]) -> models.Model:
+        """
+        Builds the CNN-LSTM model architecture.
+
+        Args:
+            input_shape (Tuple[int, int, int]): Shape of the input data.
+
+        Returns:
+            models.Model: Compiled Keras model.
+        """
         model_input = layers.Input(shape=input_shape)
 
         x = layers.Conv2D(32, (3, 3), activation="relu", padding="same")(model_input)
@@ -43,16 +59,37 @@ class NNModel(BaseModel):
         self.model = model
         return self.model
 
-    def train(self, X_train, y_train, x_val, y_val, num_of_models, epochs=10, batch_size=32):
-        print(f"Training Model {num_of_models}")
-        
-        early_stopping = callbacks.EarlyStopping(monitor="loss", patience=100)
+    def train(self, X_train: Any, y_train: Any, x_val: Any, y_val: Any, model_path: str, epochs: int = 10, batch_size: int = 32) -> models.Model:
+        """
+        Trains the Neural Network model.
+
+        Args:
+            X_train (np.ndarray): Training features.
+            y_train (np.ndarray): Training labels.
+            x_val (np.ndarray): Validation features.
+            y_val (np.ndarray): Validation labels.
+            model_path (str): Path to save the best model.
+            epochs (int, optional): Number of training epochs. Defaults to 10.
+            batch_size (int, optional): Batch size for training. Defaults to 32.
+
+        Returns:
+            models.Model: Trained Keras model.
+        """
+        print(f"Training Neural Network ...")
+
+        lr_scheduler = callbacks.ReduceLROnPlateau(
+            monitor="val_accuracy",
+            factor=0.5,
+            patience=10,
+            min_lr=1e-6
+        )
+        early_stopping = callbacks.EarlyStopping(monitor="val_accuracy", patience=100)
         model_checkpoint = callbacks.ModelCheckpoint(
-            filepath=os.path.join(self.config.model_path, f"best_model_{num_of_models}.keras"),
+            filepath=os.path.join(model_path, f"nn_model.keras"),
             monitor="val_accuracy",
             save_best_only=True
         )
-        callbacks_list = [early_stopping, model_checkpoint]
+        callbacks_list = [lr_scheduler, early_stopping, model_checkpoint]
 
         history = self.model.fit(
             X_train,
@@ -66,12 +103,36 @@ class NNModel(BaseModel):
 
         return self.model
 
-    def predict(self, X_test):
+    def predict(self, X_test: Any) -> Any:
+        """
+        Generates predictions for the test data.
+
+        Args:
+            X_test (np.ndarray): Test features.
+
+        Returns:
+            np.ndarray: Flattened prediction probabilities.
+        """
         return self.model.predict(X_test).flatten()
 
-    def save(self, path):
+    def save(self, path: str) -> None:
+        """
+        Saves the model to the specified path.
+
+        Args:
+            path (str): Path to save the model.
+        """
         self.model.save(path)
 
-    def load(self, path):
+    def load(self, path: str) -> models.Model:
+        """
+        Loads the model from the specified path.
+
+        Args:
+            path (str): Path to load the model from.
+
+        Returns:
+            models.Model: Loaded Keras model.
+        """
         self.model = models.load_model(path)
         return self.model
