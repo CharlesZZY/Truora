@@ -4,15 +4,26 @@
 
 - [Introduction](#introduction)
 - [Author](#author)
+- [Project Setup and Execution](#project-setup-and-execution)
+  - [Run the Project](#run-the-project)
+  - [Folder Structure](#folder-structure)
 - [Problem Description](#problem-description)
+  - [Objective](#objective)
+  - [Importance](#importance)
 - [Methodology](#methodology)
   - [Pipeline Overview](#pipeline-overview)
 - [Dataset](#dataset)
+  - [Overview](#overview)
+  - [Data Splitting](#data-splitting)
 - [Experiments and Results](#experiments-and-results)
+  - [Models Evaluated](#models-evaluated)
+  - [Ensemble Models](#ensemble-models)
+  - [Insights](#insights)
 - [Conclusion](#conclusion)
 - [References](#references)
 - [Repository](#repository)
 - [License](#license)
+
 
 ## Introduction
 
@@ -23,6 +34,39 @@ Truora aims to develop a machine learning-based system to detect deception in na
 **Student Name**: Zheyun Zhao  
 **Student ID**: 221170559  
 **GitHub Repository**: [Truora](https://github.com/CharlesZZY/Truora)
+
+## Project Setup and Execution
+
+### Run the Project
+
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/CharlesZZY/Truora.git
+   cd Truora
+   ```
+
+2. **Install the required dependencies**  
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the project**  
+   You can run the main script located in the `src` folder:  
+   ```bash
+   python src/main.py
+   ```
+
+4. **Jupyter Notebook**  
+   Alternatively, you can explore the entire project workflow and experiments in the `src/CBU5201_miniproject.ipynb`, which contains all **code**, **outputs**, and the corresponding **report**.
+
+### Folder Structure
+
+- **models**: Contains the trained models.  
+  (Note: Due to GitHub restrictions, the KNN and SVM models cannot be uploaded.)
+  
+- **src**: Contains the source code for data processing, feature extraction, model training, and evaluation.
+  
+- **datasets**: Contains both the original and augmented datasets for the project.
 
 ## Problem Description
 
@@ -166,9 +210,7 @@ The project utilizes the **CBU5201 Deception Dataset**, comprising:
 3. **K-Nearest Neighbors (KNN) Classifier**
    - **Accuracy**: 42%
    - **Sensitivity**: 45%
-   - **Specificity**: 40
-
-%
+   - **Specificity**: 40%
    - **AUC**: 0.42
 
 4. **Logistic Regression (LR) Classifier**
@@ -211,7 +253,9 @@ The project utilizes the **CBU5201 Deception Dataset**, comprising:
 
 ## Conclusion
 
-The project successfully established an end-to-end pipeline for deception detection in narrated stories using machine learning. Key takeaways include:
+The project successfully established an end-to-end pipeline for deception detection in narrated stories using machine learning
+
+. Key takeaways include:
 
 1. **Rich and Diverse Feature Engineering**  
    Comprehensive audio feature extraction is crucial but may require further refinement.
