@@ -68,6 +68,15 @@ Truora aims to develop a machine learning-based system to detect deception in na
   
 - **datasets**: Contains both the original and augmented datasets for the project.
 
+
+### Running the Tests
+
+To ensure the reliability and correctness of the model training and evaluation processes, the project uses **Pytest** for testing. The tests are located in the `src/test` directory. You can run the tests by executing the following command:
+
+```bash
+pytest src/test
+```
+
 ## Problem Description
 
 ### Objective
@@ -250,6 +259,12 @@ The project utilizes the **CBU5201 Deception Dataset**, comprising:
 - **Logistic Regression** and **Random Forest** contributed most significantly to the ensemble's performance.
 - **Neural Network** had minimal impact, suggesting underperformance or overfitting.
 - The ensemble approach improved sensitivity but maintained moderate specificity.
+
+### Model Evaluation Process
+
+To ensure robustness, each model's training and evaluation process was thoroughly tested with **Pytest**. Tests are designed to validate data loading, feature extraction, model training, and performance metrics.
+
+![Test Results](docs/image.png)
 
 ## Conclusion
 
