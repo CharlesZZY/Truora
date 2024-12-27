@@ -75,3 +75,15 @@ def plot_roc_curve(y_true: np.ndarray, y_pred_prob: np.ndarray) -> None:
     plt.title("Receiver Operating Characteristic (ROC) Curve")
     plt.legend(loc="lower right")
     plt.show()
+
+
+def plot_decision_boundary(model, X, y, title):
+    model.fit(X, y)
+    disp = DecisionBoundaryDisplay.from_estimator(
+        model, X, response_method="predict", cmap=plt.cm.Paired, alpha=0.5
+    )
+    plt.scatter(X[:, 0], X[:, 1], c=y, edgecolor="k", cmap=plt.cm.Paired)
+    plt.title(title)
+    plt.xlabel("Principal Component 1")
+    plt.ylabel("Principal Component 2")
+    plt.show()

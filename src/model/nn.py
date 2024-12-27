@@ -1,8 +1,9 @@
 import os
-from keras import layers, models, callbacks
-from typing import Any, Tuple
-from utils import show_history
+os.environ["KERAS_BACKEND"] = "torch"
 from .base import BaseModel
+from utils.plotter import show_history
+from typing import Any, Tuple
+from keras import layers, models, callbacks
 
 
 class NNModel(BaseModel):

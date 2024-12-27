@@ -1,5 +1,6 @@
 .DS_Store
-datasets
 datasets.zip
 knn_model.joblib
 svm_model.joblib
+__pycache__
+*.npz
