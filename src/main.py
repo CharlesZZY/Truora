@@ -24,7 +24,6 @@ from pipeline import Pipeline
 from utils.plotter import plot_decision_boundary, plot_confusion_matrix, plot_roc_curve
 from model.ensemble import EnsembleModel
 from utils.model_builder import ModelBuilder
-from typing import *
 
 
 CONFIG = {
