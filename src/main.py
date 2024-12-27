@@ -20,10 +20,11 @@ from utils.data_transformer import DataTransformer
 from model import NNModel, RFModel, KNNModel, LRModel, SVM
 from utils.evaluator import Evaluator
 from utils.predictor import Predictor
-from .pipeline import Pipeline
+from pipeline import Pipeline
 from utils.plotter import plot_decision_boundary, plot_confusion_matrix, plot_roc_curve
 from model.ensemble import EnsembleModel
 from utils.model_builder import ModelBuilder
+from typing import *
 
 
 CONFIG = {
