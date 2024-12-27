@@ -1,37 +1,36 @@
-import os
-os.environ["KERAS_BACKEND"] = "torch"
-
-from utils.augment import load_data, process_audio, save_data
-from utils.data_transformer import split_and_save_data
-from sklearn.manifold import TSNE
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
-import soundfile as sf
+from utils.model_builder import ModelBuilder
+from model.ensemble import EnsembleModel
+from utils.plotter import plot_decision_boundary, plot_confusion_matrix, plot_roc_curve
+from .pipeline import Pipeline
+from utils.predictor import Predictor
+from utils.evaluator import Evaluator
+from model import NNModel, RFModel, KNNModel, LRModel, SVM
+from utils.data_transformer import DataTransformer
+from config import Config
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from tqdm import tqdm
 from sklearn.metrics import (
     confusion_matrix,
     classification_report,
 )
-from tqdm import tqdm
-import seaborn as sns
-import pandas as pd
-import numpy as np
-from config import Config
-from utils.data_transformer import DataTransformer
-from model import NNModel, RFModel, KNNModel, LRModel, SVM
-from utils.evaluator import Evaluator
-from utils.predictor import Predictor
-from .pipeline import Pipeline
-from utils.plotter import plot_decision_boundary, plot_confusion_matrix, plot_roc_curve
-from model.ensemble import EnsembleModel
-from utils.model_builder import ModelBuilder
+import soundfile as sf
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
+from utils.data_transformer import split_and_save_data
+from utils.augment import load_data, process_audio, save_data
+import os
+os.environ["KERAS_BACKEND"] = "torch"
 
 
 CONFIG = {
     "dataset_path": "../datasets/",
-    "story_path": "../datasets/CBU0521DD_stories/",
-    "label_path": "../datasets/CBU0521DD_stories_attributes.csv",
-    "augmented_story_path": "../datasets/CBU0521DD_stories/_augmented/",
-    "augmented_label_path": "../datasets/CBU0521DD_stories_attributes_augmented.csv",
+    "story_path": "../datasets/CBU5201DD_stories/",
+    "label_path": "../datasets/CBU5201DD_stories_attributes.csv",
+    "augmented_story_path": "../datasets/CBU5201DD_stories/_augmented/",
+    "augmented_label_path": "../datasets/CBU5201DD_stories_attributes_augmented.csv",
 }
 
 label_df = pd.read_csv(CONFIG['label_path'])
@@ -307,8 +306,8 @@ pipeline.evaluate(X_test, y_test, test_models=["svm_model"])
 
 pipeline.evaluate(X_test, y_test, test_models=["nn_model", "rf_model", "knn_model", "lr_model", "svm_model"])
 
-pipeline.predict_audio("../datasets/CBU0521DD_stories/00001.wav", language="Chinese", use_models=["nn_model", "rf_model", "knn_model", "lr_model", "svm_model"])
-pipeline.predict_audio("../datasets/CBU0521DD_stories/00017.wav", language="English", use_models=["nn_model", "rf_model", "knn_model", "lr_model", "svm_model"])
+pipeline.predict_audio("../datasets/CBU5201DD_stories/00001.wav", language="Chinese", use_models=["nn_model", "rf_model", "knn_model", "lr_model", "svm_model"])
+pipeline.predict_audio("../datasets/CBU5201DD_stories/00017.wav", language="English", use_models=["nn_model", "rf_model", "knn_model", "lr_model", "svm_model"])
 
 models = {
     "nn_model": nn_model,

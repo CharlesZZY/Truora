@@ -6,10 +6,10 @@ import pandas as pd
 
 CONFIG = {
     "dataset_path": "../datasets/",
-    "story_path": "../datasets/CBU0521DD_stories/",
-    "label_path": "../datasets/CBU0521DD_stories_attributes.csv",
-    "augmented_story_path": "../datasets/CBU0521DD_stories/_augmented/",
-    "augmented_label_path": "../datasets/CBU0521DD_stories_attributes_augmented.csv",
+    "story_path": "../datasets/CBU5201DD_stories/",
+    "label_path": "../datasets/CBU5201DD_stories_attributes.csv",
+    "augmented_story_path": "../datasets/CBU5201DD_stories/_augmented/",
+    "augmented_label_path": "../datasets/CBU5201DD_stories_attributes_augmented.csv",
 }
 
 
