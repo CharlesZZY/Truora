@@ -53,7 +53,8 @@ Truora aims to develop a machine learning-based system to detect deception in na
 3. **Run the project**  
    You can run the main script located in the `src` folder:  
    ```bash
-   python src/main.py
+   cd src
+   PYTHONPATH=src python main.py
    ```
 
 4. **Jupyter Notebook**  
@@ -74,7 +75,7 @@ Truora aims to develop a machine learning-based system to detect deception in na
 To ensure the reliability and correctness of the model training and evaluation processes, the project uses **Pytest** for testing. The tests are located in the `src/test` directory. You can run the tests by executing the following command:
 
 ```bash
-pytest src/test
+PYTHONPATH=src pytest
 ```
 
 ## Problem Description
